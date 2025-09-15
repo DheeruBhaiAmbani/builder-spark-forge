@@ -1,9 +1,12 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/i18n/i18n";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 
 export default function SiteHeader() {
   const location = useLocation();
+  const { t } = useTranslation();
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -13,7 +16,7 @@ export default function SiteHeader() {
           <div className="h-8 w-8 rounded-md bg-primary/20 grid place-items-center">
             <span className="text-primary text-lg font-black">A</span>
           </div>
-          <span className="font-extrabold tracking-tight text-lg">AgriConnect</span>
+          <span className="font-extrabold tracking-tight text-lg">{t("brand")}</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <NavLink
@@ -23,7 +26,7 @@ export default function SiteHeader() {
               isActive("/") ? "text-primary" : "text-foreground/80",
             )}
           >
-            Home
+            {t("nav.home")}
           </NavLink>
           <NavLink
             to="/buyer"
@@ -34,7 +37,7 @@ export default function SiteHeader() {
               )
             }
           >
-            Buyer
+            {t("nav.buyer")}
           </NavLink>
           <NavLink
             to="/agrigenie"
@@ -45,15 +48,16 @@ export default function SiteHeader() {
               )
             }
           >
-            AgriGenie
+            {t("nav.agrigenie")}
           </NavLink>
         </nav>
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           <Button asChild variant="ghost" className="hidden sm:inline-flex">
-            <Link to="/register/farmer">Register Farmer</Link>
+            <Link to="/register/farmer">{t("actions.registerFarmer")}</Link>
           </Button>
           <Button asChild>
-            <Link to="/register/buyer">Register Buyer</Link>
+            <Link to="/register/buyer">{t("actions.registerBuyer")}</Link>
           </Button>
         </div>
       </div>

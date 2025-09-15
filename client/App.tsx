@@ -16,24 +16,28 @@ import AgriGenie from "./pages/AgriGenie";
 
 const queryClient = new QueryClient();
 
+import { I18nProvider } from "./i18n/i18n";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Index />} />
-            <Route path="/buyer" element={<BuyerDashboard />} />
-            <Route path="/register/farmer" element={<RegisterFarmer />} />
-            <Route path="/register/buyer" element={<RegisterBuyer />} />
-            <Route path="/agrigenie" element={<AgriGenie />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <I18nProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Index />} />
+              <Route path="/buyer" element={<BuyerDashboard />} />
+              <Route path="/register/farmer" element={<RegisterFarmer />} />
+              <Route path="/register/buyer" element={<RegisterBuyer />} />
+              <Route path="/agrigenie" element={<AgriGenie />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </I18nProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
