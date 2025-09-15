@@ -16,7 +16,9 @@ export default function SiteHeader() {
           <div className="h-8 w-8 rounded-md bg-primary/20 grid place-items-center">
             <span className="text-primary text-lg font-black">A</span>
           </div>
-          <span className="font-extrabold tracking-tight text-lg">{t("brand")}</span>
+          <span className="font-extrabold tracking-tight text-lg">
+            {t("brand")}
+          </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <NavLink

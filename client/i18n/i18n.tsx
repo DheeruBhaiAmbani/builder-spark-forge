@@ -1,4 +1,11 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { dictionaries } from "./dictionaries";
 
 export type Lang = "en" | "hi" | "ml";
@@ -20,7 +27,8 @@ function getBrowserLang(): Lang {
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem("lang") : null;
+    const stored =
+      typeof window !== "undefined" ? localStorage.getItem("lang") : null;
     return (stored as Lang) || getBrowserLang();
   });
 
@@ -35,16 +43,19 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     }
   }, [lang]);
 
-  const t = useCallback((key: string) => {
-    const dict = dictionaries[lang] as Record<string, any>;
-    const parts = key.split(".");
-    let cur: any = dict;
-    for (const p of parts) {
-      if (cur && typeof cur === "object" && p in cur) cur = cur[p];
-      else return key;
-    }
-    return typeof cur === "string" ? cur : key;
-  }, [lang]);
+  const t = useCallback(
+    (key: string) => {
+      const dict = dictionaries[lang] as Record<string, any>;
+      const parts = key.split(".");
+      let cur: any = dict;
+      for (const p of parts) {
+        if (cur && typeof cur === "object" && p in cur) cur = cur[p];
+        else return key;
+      }
+      return typeof cur === "string" ? cur : key;
+    },
+    [lang],
+  );
 
   const value = useMemo(() => ({ lang, setLang, t }), [lang, setLang, t]);
 

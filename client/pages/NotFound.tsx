@@ -18,7 +18,10 @@ const NotFound = () => {
       <div className="text-center">
         <h1 className="text-6xl font-extrabold mb-3">404</h1>
         <p className="text-foreground/70 mb-6">{t("notFound.oops")}</p>
-        <a href="/" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-4 py-2">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-4 py-2"
+        >
           {t("notFound.home")}
         </a>
       </div>
